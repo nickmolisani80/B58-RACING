@@ -1,72 +1,110 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DSM Racing Command Center</title>
-  <style>
-    :root{--bg:#05070b;--card:#101722;--muted:#8fa3b8;--text:#f5f7fb;--accent:#ff2d2d;--ok:#37d67a;--warn:#ffd166;--bad:#ff5c5c;--line:#263445}
-    *{box-sizing:border-box} body{margin:0;font-family:Arial,Helvetica,sans-serif;background:radial-gradient(circle at top,#182233,#05070b 55%);color:var(--text)}
-    header{padding:24px 16px 12px;text-align:center;border-bottom:1px solid var(--line);background:rgba(0,0,0,.35);position:sticky;top:0;backdrop-filter:blur(8px);z-index:10}
-    h1{margin:0;font-size:25px;letter-spacing:.5px}.sub{color:var(--muted);margin-top:6px;font-size:13px}.wrap{max-width:1050px;margin:0 auto;padding:14px}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px}.card{background:linear-gradient(180deg,#121b28,#0c111a);border:1px solid var(--line);border-radius:16px;padding:15px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
-    .track{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.track h2{font-size:18px;margin:0 0 4px}.pill{font-weight:bold;border-radius:999px;padding:6px 9px;font-size:12px;background:#1b2635;border:1px solid #33465e}.good{color:var(--ok)}.fair{color:var(--warn)}.poor{color:var(--bad)}
-    .meta{color:var(--muted);font-size:12px;margin-bottom:12px}.big{font-size:33px;font-weight:800;margin:8px 0}.da{font-size:14px;color:var(--muted)}
-    .stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.stat{background:#090d14;border:1px solid #1f2b3a;border-radius:12px;padding:10px}.label{color:var(--muted);font-size:12px}.val{font-size:16px;font-weight:bold;margin-top:4px}
-    button{width:100%;margin:14px 0 6px;background:var(--accent);border:0;color:white;padding:13px;border-radius:12px;font-size:16px;font-weight:bold}.note{font-size:12px;color:var(--muted);line-height:1.35}.section-title{font-size:20px;margin:16px 2px 10px}.maprow{display:flex;justify-content:space-between;border-bottom:1px solid #223044;padding:10px 0}.maprow:last-child{border-bottom:0}.hide{opacity:.75}
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>DSM Racing Command Center</title>
+<style>
+:root{--bg:#070b12;--card:#111827;--card2:#0b1220;--line:#253044;--text:#f8fafc;--muted:#94a3b8;--red:#ef4444;--green:#22c55e;--yellow:#facc15;--blue:#38bdf8;--orange:#fb923c}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#172033 0,#070b12 45%,#020617 100%);color:var(--text);font-family:Arial,Helvetica,sans-serif}.wrap{max-width:1180px;margin:0 auto;padding:18px 14px 80px}.hero{padding:22px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(135deg,#111827,#020617);box-shadow:0 18px 40px rgba(0,0,0,.35)}h1{margin:0;font-size:30px;letter-spacing:.5px}.sub{color:var(--muted);margin-top:8px}.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.badge{background:#1f2937;border:1px solid #334155;border-radius:999px;padding:8px 10px;font-weight:700;font-size:13px}.nav{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:14px 0}.nav a{text-decoration:none;color:white;background:#172033;border:1px solid #334155;border-radius:14px;padding:12px;text-align:center;font-weight:800}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}.card{grid-column:span 12;background:rgba(17,24,39,.92);border:1px solid var(--line);border-radius:20px;padding:16px;box-shadow:0 14px 30px rgba(0,0,0,.25)}@media(min-width:850px){.half{grid-column:span 6}.third{grid-column:span 4}.two{grid-column:span 8}}h2{margin:0 0 12px;font-size:22px}.muted{color:var(--muted)}table{width:100%;border-collapse:collapse;overflow:hidden;border-radius:12px}th,td{padding:10px;border-bottom:1px solid #253044;text-align:left}th{color:#cbd5e1;background:#0b1220}.pill{display:inline-block;border-radius:999px;padding:5px 8px;font-weight:800;font-size:12px}.green{background:rgba(34,197,94,.15);color:#86efac}.yellow{background:rgba(250,204,21,.14);color:#fde68a}.red{background:rgba(239,68,68,.14);color:#fecaca}.blue{background:rgba(56,189,248,.13);color:#bae6fd}.orange{background:rgba(251,146,60,.15);color:#fed7aa}.track{display:grid;gap:10px}.trackCard{background:#0b1220;border:1px solid #263244;border-radius:16px;padding:13px}.trackTop{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}.trackName{font-size:17px;font-weight:900}.conditions{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:10px}.metric{background:#111827;border:1px solid #243047;border-radius:12px;padding:9px}.metric b{display:block;font-size:18px}.metric span{color:var(--muted);font-size:12px}.btn{background:#ef4444;color:white;border:0;border-radius:12px;padding:11px 14px;font-weight:900;cursor:pointer}.btn2{background:#334155;color:white;border:1px solid #475569}.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.input{background:#020617;color:white;border:1px solid #334155;border-radius:12px;padding:10px;width:100%}textarea.input{min-height:85px}.small{font-size:12px;color:var(--muted)}.check{display:flex;gap:8px;align-items:center;margin:8px 0}.footer{color:#64748b;text-align:center;margin-top:20px}.warn{border-left:4px solid var(--orange);padding-left:10px}.ok{border-left:4px solid var(--green);padding-left:10px}
+</style>
 </head>
 <body>
-<header><h1>DSM Racing Command Center</h1><div class="sub">Live Track Conditions • Density Altitude • Supra Maps</div></header>
 <div class="wrap">
-  <button onclick="loadWeather()">Refresh Live Track Conditions</button>
-  <div class="note">Uses live weather from Open-Meteo. DA is an estimate based on temperature, humidity, pressure, and track elevation. Always confirm with your trackside weather station before tuning or making a pass.</div>
-  <h2 class="section-title">Live Track Conditions</h2>
-  <div id="tracks" class="grid"></div>
-  <h2 class="section-title">Supra Map Command</h2>
-  <div class="card">
-    <div class="maprow"><b>Map 1</b><span>747 WHP — Pump / Street</span></div>
-    <div class="maprow"><b>Map 2</b><span>847 WHP — Race</span></div>
-    <div class="maprow"><b>Map 3</b><span>958+ WHP — Public Sheet / Max Street</span></div>
-    <div class="maprow hide"><b>Hidden</b><span>Private full calibration</span></div>
-  </div>
+  <section class="hero">
+    <h1>DSM Racing Command Center</h1>
+    <div class="sub">Supra maps, race planning, track conditions, density altitude, event prep, and run notes.</div>
+    <div class="badges"><span class="badge">2021 GR Supra</span><span class="badge">B58 / KLM / Precision 6870</span><span class="badge">Mikey Botti Tuned</span><span class="badge">Live DA v3</span></div>
+  </section>
+  <nav class="nav"><a href="#weather">Live Track Conditions</a><a href="#maps">Supra Maps</a><a href="#log">Race Log</a><a href="#prep">Prep Checklist</a></nav>
+  <main class="grid">
+    <section id="weather" class="card two">
+      <div class="row" style="justify-content:space-between"><h2>Live Track Conditions + Estimated DA</h2><button class="btn" onclick="loadWeather()">Refresh Conditions</button></div>
+      <p class="muted">Pulls live weather for each track and estimates density altitude. Good for comparing air before you leave or choosing a map.</p>
+      <div id="weatherStatus" class="small">Loading live conditions...</div>
+      <div id="tracks" class="track"></div>
+    </section>
+    <section class="card third">
+      <h2>DA Rating Guide</h2>
+      <p class="ok"><b>Great air:</b> under 500 ft DA</p>
+      <p class="ok"><b>Good air:</b> 500–1,500 ft DA</p>
+      <p class="warn"><b>Fair air:</b> 1,500–2,500 ft DA</p>
+      <p class="warn"><b>Slow air:</b> over 2,500 ft DA</p>
+      <p class="small">DA is estimated from temp, humidity, pressure, and track elevation. Verify with your Dragy/weather station at the track for final tuning decisions.</p>
+    </section>
+    <section id="maps" class="card half">
+      <h2>Supra Power Maps</h2>
+      <table><thead><tr><th>Map</th><th>Power</th><th>Use</th></tr></thead><tbody>
+        <tr><td><b>Map 1</b></td><td>747 whp</td><td><span class="pill green">Pump / Street</span></td></tr>
+        <tr><td><b>Map 2</b></td><td>847 whp</td><td><span class="pill yellow">Race</span></td></tr>
+        <tr><td><b>Map 3</b></td><td>958+ whp</td><td><span class="pill orange">Public Sheet / Max Street</span></td></tr>
+        <tr><td><b>Hidden</b></td><td>Private</td><td><span class="pill red">Full calibration - do not disclose</span></td></tr>
+      </tbody></table>
+    </section>
+    <section class="card half">
+      <h2>Current Build Snapshot</h2>
+      <table><tbody>
+        <tr><th>Engine</th><td>Built B58, CP 11:1 pistons, Boostline rods, ARP hardware, King bearings</td></tr>
+        <tr><th>Top End</th><td>Kelford Stage 2 cams, upgraded springs, OEM head gasket</td></tr>
+        <tr><th>Turbo</th><td>KLM kit, Precision Next Gen 6870, twin 45mm Hyper-Gates</td></tr>
+        <tr><th>Fuel</th><td>DI + ID1050 port injection + methanol injection</td></tr>
+        <tr><th>Drivetrain</th><td>Pure Stage 2 trans, DSS 1200hp axles</td></tr>
+      </tbody></table>
+    </section>
+    <section id="log" class="card two">
+      <h2>Race Log Entry</h2>
+      <div class="grid">
+        <div class="card third" style="box-shadow:none"><label>Track</label><input class="input" id="trackInput" placeholder="US 13 Dragway"></div>
+        <div class="card third" style="box-shadow:none"><label>Map</label><input class="input" id="mapInput" placeholder="Map 2 / Map 3"></div>
+        <div class="card third" style="box-shadow:none"><label>Tire Pressure</label><input class="input" id="psiInput" placeholder="18 psi"></div>
+      </div>
+      <label>Notes / Timeslip / Dragy</label><textarea class="input" id="notesInput" placeholder="60 ft, 1/8, 1/4, trap, DA, launch setting, boost, shift notes..."></textarea>
+      <div class="row" style="margin-top:10px"><button class="btn" onclick="saveRun()">Save Run Note</button><button class="btn btn2" onclick="clearRuns()">Clear Notes</button></div>
+      <div id="runs"></div>
+    </section>
+    <section id="prep" class="card third">
+      <h2>Race Prep Checklist</h2>
+      <label class="check"><input type="checkbox"> Torque wheels</label>
+      <label class="check"><input type="checkbox"> Check axle / diff brace area</label>
+      <label class="check"><input type="checkbox"> Methanol full</label>
+      <label class="check"><input type="checkbox"> Ethanol tested</label>
+      <label class="check"><input type="checkbox"> Tire pressure set</label>
+      <label class="check"><input type="checkbox"> Dragy charged</label>
+      <label class="check"><input type="checkbox"> Helmet / harness ready</label>
+      <label class="check"><input type="checkbox"> Check event rules</label>
+    </section>
+    <section class="card half">
+      <h2>Track Database</h2>
+      <table><thead><tr><th>Track</th><th>Location</th><th>Elev.</th></tr></thead><tbody id="trackTable"></tbody></table>
+    </section>
+    <section class="card half">
+      <h2>Event Planner</h2>
+      <table><thead><tr><th>Event</th><th>Track</th><th>Notes</th></tr></thead><tbody>
+        <tr><td>Street Car Takeover</td><td>Maple Grove</td><td>Roll racing / test & tune prep</td></tr>
+        <tr><td>Sick Week</td><td>Multi-track</td><td>9.0 cap without cage; plan map choice</td></tr>
+        <tr><td>US 13 Test & Tune</td><td>Delmar, DE</td><td>Best local baseline testing</td></tr>
+      </tbody></table>
+    </section>
+  </main>
+  <div class="footer">DSM Racing Command Center v3 — full command center + live conditions restored</div>
 </div>
 <script>
-const tracks = [
-  {name:'US 13 Dragway', city:'Delmar, DE', lat:38.4565, lon:-75.5599, elev:52},
-  {name:'Maple Grove Raceway', city:'Mohnton, PA', lat:40.2098, lon:-75.9822, elev:548},
-  {name:'Cecil County Dragway', city:'Rising Sun, MD', lat:39.6657, lon:-76.0537, elev:318},
-  {name:'Maryland Intl Raceway', city:'Mechanicsville, MD', lat:38.3919, lon:-76.7337, elev:90},
-  {name:'Atco Dragway', city:'Atco, NJ', lat:39.7706, lon:-74.8879, elev:118}
+const tracks=[
+{name:'US 13 Dragway',city:'Delmar, DE',lat:38.4505,lon:-75.5694,elev:49},
+{name:'Maple Grove Raceway',city:'Mohnton, PA',lat:40.2097,lon:-75.9580,elev:548},
+{name:'Cecil County Dragway',city:'Rising Sun, MD',lat:39.6660,lon:-76.0480,elev:315},
+{name:'Maryland International Raceway',city:'Mechanicsville, MD',lat:38.3866,lon:-76.7715,elev:80},
+{name:'Atco Dragway',city:'Atco, NJ',lat:39.7698,lon:-74.8877,elev:95}
 ];
-function cToF(c){return c*9/5+32} function msToMph(ms){return ms*2.23694} function mbToInhg(mb){return mb*0.029529983}
-function saturationVaporPressureMb(tempC){return 6.1078*Math.pow(10,(7.5*tempC)/(237.3+tempC))}
-function densityAltitudeFt(tempC, rh, pressureMb, elevFt){
-  const tempF = cToF(tempC), inHg = mbToInhg(pressureMb);
-  const pressureAlt = (29.92 - inHg) * 1000 + elevFt;
-  const standardTempC = 15 - 0.0019812 * elevFt;
-  const vapor = saturationVaporPressureMb(tempC) * (rh/100);
-  const virtualTempC = (tempC+273.15)/(1 - (vapor/pressureMb)*(1-0.622)) - 273.15;
-  const da = pressureAlt + 120 * (virtualTempC - standardTempC);
-  return Math.round(da);
-}
-function rating(da){ if(da<500)return ['Great Air','good']; if(da<1500)return ['Good Air','good']; if(da<2500)return ['Fair Air','fair']; if(da<3500)return ['Heavy Air','fair']; return ['Bad Air','poor']; }
-function windNote(deg, mph){ if(mph<4)return 'Light wind'; return `${Math.round(mph)} mph from ${Math.round(deg)}°`; }
-async function loadWeather(){
-  const box=document.getElementById('tracks'); box.innerHTML = tracks.map(t=>`<div class="card"><h2>${t.name}</h2><div class="meta">Loading ${t.city}...</div></div>`).join('');
-  const cards=[];
-  for(const t of tracks){
-    try{
-      const url=`https://api.open-meteo.com/v1/forecast?latitude=${t.lat}&longitude=${t.lon}&current=temperature_2m,relative_humidity_2m,pressure_msl,wind_speed_10m,wind_direction_10m&temperature_unit=celsius&wind_speed_unit=ms&timezone=auto`;
-      const r=await fetch(url); const data=await r.json(); const c=data.current;
-      const tempF=Math.round(cToF(c.temperature_2m)); const windMph=Math.round(msToMph(c.wind_speed_10m));
-      const da=densityAltitudeFt(c.temperature_2m,c.relative_humidity_2m,c.pressure_msl,t.elev); const [txt,cls]=rating(da);
-      cards.push(`<div class="card"><div class="track"><div><h2>${t.name}</h2><div class="meta">${t.city} • Elev. ${t.elev} ft</div></div><div class="pill ${cls}">${txt}</div></div><div class="big">${tempF}°F</div><div class="da">Estimated DA: <b>${da.toLocaleString()} ft</b></div><div class="stats"><div class="stat"><div class="label">Humidity</div><div class="val">${c.relative_humidity_2m}%</div></div><div class="stat"><div class="label">Pressure</div><div class="val">${mbToInhg(c.pressure_msl).toFixed(2)} inHg</div></div><div class="stat"><div class="label">Wind</div><div class="val">${windMph} mph</div></div><div class="stat"><div class="label">Direction</div><div class="val">${Math.round(c.wind_direction_10m)}°</div></div></div><div class="note" style="margin-top:10px">${windNote(c.wind_direction_10m, windMph)} • Updated ${new Date(c.time).toLocaleString()}</div></div>`);
-    }catch(e){cards.push(`<div class="card"><h2>${t.name}</h2><div class="meta">${t.city}</div><p class="poor">Could not load live weather.</p></div>`)}
-  }
-  box.innerHTML=cards.join('');
-}
-loadWeather();
+function fToC(f){return (f-32)*5/9}function cToF(c){return c*9/5+32}function hPaToInHg(h){return h*0.0295299830714}function rating(da){if(da<500)return ['Great','green'];if(da<1500)return ['Good','green'];if(da<2500)return ['Fair','yellow'];return ['Slow','red']}
+function estimateDA(tempF,rh,pressureHpa,elevFt){const tempC=fToC(tempF);const stationInHg=hPaToInHg(pressureHpa);const pressureAlt=(29.92-stationInHg)*1000+elevFt;const svp=6.1078*Math.pow(10,(7.5*tempC)/(237.3+tempC));const vp=svp*(rh/100);const virtualC=(tempC+273.15)/(1-0.378*(vp/pressureHpa))-273.15;const isaC=15-(1.98*(pressureAlt/1000));return Math.round(pressureAlt+120*(virtualC-isaC));}
+function windText(deg){const dirs=['N','NE','E','SE','S','SW','W','NW'];return dirs[Math.round(deg/45)%8]}
+async function loadWeather(){document.getElementById('weatherStatus').textContent='Refreshing live weather...';const box=document.getElementById('tracks');box.innerHTML='';for(const t of tracks){try{const url=`https://api.open-meteo.com/v1/forecast?latitude=${t.lat}&longitude=${t.lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,surface_pressure,wind_speed_10m,wind_direction_10m&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=auto`;const r=await fetch(url);const data=await r.json();const c=data.current;const da=estimateDA(c.temperature_2m,c.relative_humidity_2m,c.surface_pressure,t.elev);const rt=rating(da);box.innerHTML+=`<div class="trackCard"><div class="trackTop"><div><div class="trackName">${t.name}</div><div class="small">${t.city} • Elev. ${t.elev} ft</div></div><span class="pill ${rt[1]}">${rt[0]} Air</span></div><div class="conditions"><div class="metric"><b>${Math.round(c.temperature_2m)}°F</b><span>Temp</span></div><div class="metric"><b>${c.relative_humidity_2m}%</b><span>Humidity</span></div><div class="metric"><b>${hPaToInHg(c.surface_pressure).toFixed(2)}</b><span>Pressure inHg</span></div><div class="metric"><b>${Math.round(c.wind_speed_10m)} mph ${windText(c.wind_direction_10m)}</b><span>Wind</span></div><div class="metric"><b>${da} ft</b><span>Estimated DA</span></div><div class="metric"><b>${new Date(c.time).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'})}</b><span>Updated</span></div></div></div>`}catch(e){box.innerHTML+=`<div class="trackCard"><b>${t.name}</b><p class="red pill">Weather failed to load</p></div>`}}
+document.getElementById('weatherStatus').textContent='Live weather loaded. Tap Refresh Conditions any time.'}
+function fillTrackTable(){document.getElementById('trackTable').innerHTML=tracks.map(t=>`<tr><td>${t.name}</td><td>${t.city}</td><td>${t.elev} ft</td></tr>`).join('')}
+function saveRun(){const run={date:new Date().toLocaleString(),track:trackInput.value,map:mapInput.value,psi:psiInput.value,notes:notesInput.value};const arr=JSON.parse(localStorage.getItem('runs')||'[]');arr.unshift(run);localStorage.setItem('runs',JSON.stringify(arr));renderRuns()}
+function renderRuns(){const arr=JSON.parse(localStorage.getItem('runs')||'[]');runs.innerHTML=arr.map(r=>`<div class="trackCard"><b>${r.date}</b><br>${r.track||''} • ${r.map||''} • ${r.psi||''}<p>${(r.notes||'').replace(/</g,'&lt;')}</p></div>`).join('')}
+function clearRuns(){localStorage.removeItem('runs');renderRuns()}
+fillTrackTable();renderRuns();loadWeather();
 </script>
 </body>
 </html>
