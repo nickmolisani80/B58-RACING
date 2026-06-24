@@ -1,6 +1,1 @@
-{
-  "scripts": {
-    "build": "mkdir -p dist && cp index.html dist/index.html"
-  },
-  "dependencies": {}
-}
+{"scripts":{"build":"echo Static build complete"},"dependencies":{},"devDependencies":{}}
