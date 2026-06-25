@@ -1,5 +1,1 @@
-{
-  "scripts": {
-    "build": "mkdir -p public && if [ ! -f public/index.html ]; then cp index.html public/index.html; fi && echo public ready"
-  }
-}
+{"scripts":{"build":"mkdir -p public && cp index.html public/index.html && echo public ready"}}
