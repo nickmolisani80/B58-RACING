@@ -1,1 +1,1 @@
-{"scripts":{"build":"mkdir -p public && cp index.html public/index.html && echo public ready"}}
+{"scripts":{"build":"mkdir -p public/assets && cp index.html public/index.html && cp -r assets/* public/assets/ 2>/dev/null || true"},"dependencies":{}}
