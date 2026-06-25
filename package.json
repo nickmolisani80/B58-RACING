@@ -1,1 +1,5 @@
-{"scripts":{"build":"echo static site ready"},"dependencies":{},"devDependencies":{}}
+{
+  "scripts": {
+    "build": "mkdir -p public && if [ ! -f public/index.html ]; then cp index.html public/index.html; fi && echo public ready"
+  }
+}
