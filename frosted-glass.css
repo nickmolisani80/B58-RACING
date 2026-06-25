@@ -1,0 +1,161 @@
+/* B58 Racing Command Center - Frosted Glass Theme Patch */
+:root {
+  --b58-bg: #eef2f6;
+  --b58-card: rgba(255, 255, 255, 0.72);
+  --b58-card-strong: rgba(255, 255, 255, 0.88);
+  --b58-text: #172033;
+  --b58-muted: #5b677a;
+  --b58-accent: #0ea5e9;
+  --b58-accent-dark: #0369a1;
+  --b58-border: rgba(255, 255, 255, 0.68);
+  --b58-shadow: 0 18px 50px rgba(15, 23, 42, 0.16);
+}
+
+html, body {
+  background: radial-gradient(circle at top left, #ffffff 0, var(--b58-bg) 42%, #dbe4ee 100%) !important;
+  color: var(--b58-text) !important;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(135deg, rgba(14, 165, 233, 0.08), transparent 38%),
+    linear-gradient(315deg, rgba(15, 23, 42, 0.08), transparent 42%);
+  z-index: -1;
+}
+
+/* Main containers/cards: works with most existing layouts without changing functions */
+section, .section, .card, .panel, .widget, .box, .tile, .dashboard-card, .content-card, main > div, article {
+  background: var(--b58-card) !important;
+  color: var(--b58-text) !important;
+  border: 1px solid var(--b58-border) !important;
+  border-radius: 22px !important;
+  box-shadow: var(--b58-shadow) !important;
+  backdrop-filter: blur(18px) saturate(1.25) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(1.25) !important;
+}
+
+/* Header / hero area */
+header, .hero, .top, .topbar, .command-hero {
+  position: relative !important;
+  overflow: hidden !important;
+  min-height: 38vh !important;
+  background: linear-gradient(135deg, rgba(255,255,255,0.82), rgba(226,236,246,0.58)) !important;
+  color: var(--b58-text) !important;
+  border-radius: 0 0 28px 28px !important;
+  box-shadow: 0 22px 70px rgba(15, 23, 42, 0.2) !important;
+}
+
+header video, .hero video, .command-hero video, video.hero-video, #heroVideo {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  z-index: 0 !important;
+  opacity: 0.72 !important;
+  filter: brightness(1.08) contrast(1.05) saturate(1.12) !important;
+}
+
+header::after, .hero::after, .command-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(255,255,255,0.72), rgba(255,255,255,0.24), rgba(255,255,255,0.7));
+  z-index: 1;
+  pointer-events: none;
+}
+
+header > *, .hero > *, .command-hero > * {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+h1, h2, h3, h4, p, label, span, li {
+  color: inherit;
+}
+
+h1, .title {
+  color: #0f172a !important;
+  text-shadow: 0 2px 20px rgba(255,255,255,0.8) !important;
+  letter-spacing: -0.03em !important;
+}
+
+/* Navigation */
+nav, .nav, .tabs, .menu {
+  background: rgba(255,255,255,0.74) !important;
+  border: 1px solid rgba(255,255,255,0.8) !important;
+  border-radius: 18px !important;
+  box-shadow: 0 12px 36px rgba(15, 23, 42, 0.12) !important;
+  backdrop-filter: blur(18px) !important;
+  -webkit-backdrop-filter: blur(18px) !important;
+}
+
+button, .button, a.button, nav a, .nav a, .tabs button, .tabs a {
+  background: rgba(255,255,255,0.72) !important;
+  color: var(--b58-text) !important;
+  border: 1px solid rgba(14, 165, 233, 0.2) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08) !important;
+}
+
+button:hover, .button:hover, nav a:hover, .nav a:hover, .tabs button:hover, .tabs a:hover,
+button.active, .active, .selected {
+  background: linear-gradient(135deg, #e0f2fe, #ffffff) !important;
+  color: var(--b58-accent-dark) !important;
+  border-color: rgba(14,165,233,0.55) !important;
+}
+
+/* Countdown/gauge style cards */
+.countdown, .countdown-card, .gauge, .gauge-card, .stat, .metric, .kpi {
+  background: rgba(255,255,255,0.76) !important;
+  border: 1px solid rgba(255,255,255,0.84) !important;
+  color: var(--b58-text) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+}
+
+.stat strong, .metric strong, .kpi strong, .gauge strong, .countdown strong,
+.stat .value, .metric .value, .kpi .value, .value, .number {
+  color: var(--b58-accent-dark) !important;
+  text-shadow: none !important;
+}
+
+/* Inputs/tables */
+input, select, textarea {
+  background: rgba(255,255,255,0.82) !important;
+  color: var(--b58-text) !important;
+  border: 1px solid rgba(14,165,233,0.25) !important;
+  border-radius: 12px !important;
+}
+
+table {
+  background: rgba(255,255,255,0.68) !important;
+  color: var(--b58-text) !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+}
+
+th {
+  background: rgba(224,242,254,0.9) !important;
+  color: #075985 !important;
+}
+
+td {
+  border-color: rgba(148,163,184,0.28) !important;
+}
+
+/* Mobile polish */
+@media (max-width: 760px) {
+  header, .hero, .command-hero {
+    min-height: 34vh !important;
+    border-radius: 0 0 22px 22px !important;
+  }
+
+  section, .section, .card, .panel, .widget, .box, .tile, .dashboard-card, .content-card, main > div, article {
+    border-radius: 18px !important;
+  }
+}
